@@ -59,19 +59,25 @@ router.get("/register/:username", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email: req.body.email });
-    !user && res.status(404).json("User not found");
+    if (!user) {
+      return res.status(404).json("User not found");
+    }
 
-    const validPassword = await bcrypt.compare(
-      req.body.password,
-      user.password
-    );
-    !validPassword && res.status(400).json("wrong password");
+    // Replace "plaintextPassword" with the actual plaintext password provided by the user.
+    const plaintextPassword = req.body.password;
+
+    // Compare the plaintextPassword with the stored password (hashed value).
+    if (user.password !== plaintextPassword) {
+      return res.status(400).json("Wrong password");
+    }
 
     res.status(200).json(user);
   } catch (err) {
     console.log(err);
+    res.status(500).json("Server error");
   }
 });
+
 router.post('/logout', (req, res) => {
   // Perform the logout action here
   // For example, you can clear the session or perform any other necessary tasks
