@@ -7,10 +7,10 @@ const dotenv = require("dotenv");
 const helmet = require("helmet");
 const morgan = require("morgan");
 const path = require("path");
-const userRoute = require("./routes/users");
-const authRoute = require("./routes/auth");
-const postRoute = require("./routes/posts");
-const profileRoute = require("./routes/profile");
+const userRoute = require("../routes/users");
+const authRoute = require("../routes/auth");
+const postRoute = require("../routes/posts");
+const profileRoute = require("../routes/profile");
 
 const bodyParser = require("body-parser");
 
