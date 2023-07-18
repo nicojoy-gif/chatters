@@ -63,5 +63,5 @@ app.use("/api/auth", authRoute);
 app.use("/api/posts", postRoute);
 dotenv.config();
 mongoose.connect(process.env.MONGO_URL);
-
+const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Listening on port ${port}`));
