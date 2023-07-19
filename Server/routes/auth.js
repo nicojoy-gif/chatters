@@ -1,14 +1,13 @@
 const router = require("express").Router();
 const User = require("../models/User");
 const admin = require("firebase-admin");
-const express = require('express');
-const session = require('express-session');
+const express = require("express");
+const session = require("express-session");
 const app = express();
-
 
 router.use(
   session({
-    secret: 'your-secret-key',
+    secret: "your-secret-key",
     resave: false,
     saveUninitialized: true,
   })
@@ -23,7 +22,7 @@ const auth = admin.auth();
 
 router.post("/register", async (req, res) => {
   try {
-    const hashedPassword = req.body.password
+    const hashedPassword = req.body.password;
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
@@ -63,15 +62,10 @@ router.post("/login", async (req, res) => {
       return res.status(404).json("User not found");
     }
 
-    // Replace "plaintextPassword" with the actual plaintext password provided by the user.
     const plaintextPassword = req.body.password;
-
-    // Compare the plaintextPassword with the stored password (hashed value).
     if (user.password !== plaintextPassword) {
       return res.status(400).json("Wrong password");
     }
-console.log(user.password)
-console.log(req.bo)
     res.status(200).json(user);
   } catch (err) {
     console.log(err);
@@ -79,7 +73,7 @@ console.log(req.bo)
   }
 });
 
-router.post('/logout', (req, res) => {
+router.post("/logout", (req, res) => {
   // Perform the logout action here
   // For example, you can clear the session or perform any other necessary tasks
 
@@ -93,8 +87,5 @@ router.post('/logout', (req, res) => {
     }
   });
 });
-
-
-
 
 module.exports = router;
