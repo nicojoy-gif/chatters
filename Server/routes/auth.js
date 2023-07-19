@@ -70,7 +70,8 @@ router.post("/login", async (req, res) => {
     if (user.password !== plaintextPassword) {
       return res.status(400).json("Wrong password");
     }
-
+console.log(user.password)
+console.log(req.bo)
     res.status(200).json(user);
   } catch (err) {
     console.log(err);
