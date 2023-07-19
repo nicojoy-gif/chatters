@@ -18,7 +18,7 @@ const bodyParser = require("body-parser");
 dotenv.config();
 
 // Allowed origins for CORS
-const allowedOrigins = ["https://chatter-seven-rust.vercel.app/", "https://chatterapp-gilt.vercel.app/", "http://localhost:3000"];
+const allowedOrigins = ["https://chatter-seven-rust.vercel.app", "https://chatterapp-gilt.vercel.app", "http://localhost:3000"];
 
 // CORS options with custom origin check
 const corsOptions = {
