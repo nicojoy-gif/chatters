@@ -15,7 +15,7 @@ const profileRoute = require("./routes/profile");
 const bodyParser = require("body-parser");
 
 
-const allowedOrigins = ["https://chatterapp-gilt.vercel.app/", "http://localhost:3000", "https://chatter-seven-rust.vercel.app/"]; // Add more origins if needed.
+const allowedOrigins = ["https://chatter-seven-rust.vercel.app/", "https://chatterapp-gilt.vercel.app/", "http://localhost:3000"]; // Add more origins if needed.
 
 const corsOptions = {
   origin: function (origin, callback) {
