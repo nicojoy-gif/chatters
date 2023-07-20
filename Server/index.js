@@ -38,6 +38,19 @@ app.use(morgan("common")); // Morgan for request logging
 app.use(express.json()); // Parse JSON requests
 app.use(bodyParser.urlencoded({ extended: true })); // Parse URL-encoded requests
 
+// Set Cross-Origin-Resource-Policy header based on origin
+app.use(function(req, res, next) {
+  const origin = req.get("origin");
+  if (allowedOrigins.indexOf(origin) !== -1) {
+    // Set same-site policy if the request origin is in allowedOrigins
+    res.setHeader("Cross-Origin-Resource-Policy", "same-site");
+  } else {
+    // Set cross-origin policy for other origins
+    res.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
+  }
+  next();
+});
+
 // Serve static images from the "public/images" directory
 app.use("/images", express.static(path.join(__dirname, "public/images")));
 
