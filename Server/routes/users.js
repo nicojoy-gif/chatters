@@ -2,41 +2,6 @@ const User = require("../models/User");
 const router = require("express").Router();
 const multer = require('multer');
 
-// Configure multer storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, '../public/images'); // Specify the directory where uploaded files will be stored
-  },
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + '-' + file.originalname); // Generate a unique filename
-  },
-});
-
-// Create multer instance with the configured storage
-const upload = multer({ storage });
-//update user
-
-router.put('/:id', upload.single('profilePicture'), async (req, res) => {
- 
-    if (req.file) {
-      // Handle profile picture update
-      const profilePicturePath = req.file.path;
-
-      try {
-        // Update the user's profile picture in the database
-        await User.findByIdAndUpdate(req.params.id, {
-          $set: { profilePicture: profilePicturePath },
-        });
-
-        res.status(200).json('Profile picture has been updated');
-      } catch (err) {
-        return res.status(500).json(err);
-      }
-    } else {
-      return res.status(400).json('No profile picture file provided');
-    }
-  
-});
 
 //get friends
 router.get("/friends/:userId", async (req, res) => {

@@ -11,7 +11,7 @@ const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 const profileRoute = require("./routes/profile");
-
+const User = require("../models/User");
 const bodyParser = require("body-parser");
 
 // Load environment variables from .env file
@@ -75,6 +75,28 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
     // You might want to send an error response here if the upload fails
     res.status(500).json("File upload failed");
   }
+});
+
+router.put('/:id', upload.single('profilePicture'), async (req, res) => {
+ 
+  if (req.file) {
+    // Handle profile picture update
+    const profilePicturePath = req.file.path;
+
+    try {
+      // Update the user's profile picture in the database
+      await User.findByIdAndUpdate(req.params.id, {
+        $set: { profilePicture: profilePicturePath },
+      });
+
+      res.status(200).json('Profile picture has been updated');
+    } catch (err) {
+      return res.status(500).json(err);
+    }
+  } else {
+    return res.status(400).json('No profile picture file provided');
+  }
+
 });
 
 // Welcome route
