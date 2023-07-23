@@ -5,7 +5,7 @@ const multer = require('multer');
 // Configure multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, './public/images'); // Specify the directory where uploaded files will be stored
+    cb(null, '../public/images'); // Specify the directory where uploaded files will be stored
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + '-' + file.originalname); // Generate a unique filename
