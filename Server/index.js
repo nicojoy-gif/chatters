@@ -77,7 +77,7 @@ app.post("/api/upload", upload.single("file"), (req, res) => {
   }
 });
 
-app.put('/:id', upload.single('profilePicture'), async (req, res) => {
+app.put('api/users/:id', upload.single('profilePicture'), async (req, res) => {
  
   if (req.file) {
     // Handle profile picture update
