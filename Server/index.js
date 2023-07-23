@@ -11,7 +11,7 @@ const userRoute = require("./routes/users");
 const authRoute = require("./routes/auth");
 const postRoute = require("./routes/posts");
 const profileRoute = require("./routes/profile");
-const User = require("../models/User");
+const User = require("./models/User");
 const bodyParser = require("body-parser");
 
 // Load environment variables from .env file
