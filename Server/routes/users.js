@@ -2,22 +2,24 @@ const User = require("../models/User");
 const router = require("express").Router();
 const multer = require('multer');
 
-
+// Configure multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "/public/images"));
+    cb(null, './public/'); // Specify the directory where uploaded files will be stored
   },
   filename: (req, file, cb) => {
-    cb(null, file.originalname);
+    cb(null, Date.now() + '-' + file.originalname); // Generate a unique filename
   },
 });
 
+// Create multer instance with the configured storage
 const upload = multer({ storage });
-
+//update user
 
 router.put('/:id', upload.single('profilePicture'), async (req, res) => {
  
     if (req.file) {
+      // Handle profile picture update
       const profilePicturePath = req.file.path;
 
       try {
