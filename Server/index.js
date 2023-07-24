@@ -82,7 +82,7 @@ app.put('/api/users/:id', upload.single('profilePicture'), async (req, res) => {
   if (req.file) {
     // Handle profile picture update
     const profilePicturePath = req.file.path;
-
+console.log(profilePicturePath)
     try {
       // Update the user's profile picture in the database
       await User.findByIdAndUpdate(req.params.id, {
